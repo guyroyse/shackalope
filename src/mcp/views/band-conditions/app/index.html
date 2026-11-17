@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Band Conditions</title>
+    <script type="module" src="./main.ts"></script>
+  </head>
+  <body>
+    <main class="panel" data-state="waiting">
+      <header class="panel-header">
+        <h1>Band conditions</h1>
+        <div class="header-actions">
+          <p class="updated" data-slot="updated">
+            Fetching from HamQSL&hellip;
+          </p>
+          <button type="button" class="refresh" data-slot="refresh">
+            Refresh
+          </button>
+        </div>
+      </header>
+
+      <div class="top">
+        <figure class="sun">
+          <div class="sun-frame">
+            <img data-slot="sun-image" alt="" width="512" height="512" />
+          </div>
+          <figcaption data-slot="sun-caption"></figcaption>
+          <div
+            class="sun-views"
+            role="group"
+            aria-label="Solar image"
+            data-slot="sun-views"
+          ></div>
+        </figure>
+
+        <section class="hf">
+          <h2>HF</h2>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Bands</th>
+                <th scope="col">Day</th>
+                <th scope="col">Night</th>
+              </tr>
+            </thead>
+            <tbody data-slot="hf-rows"></tbody>
+          </table>
+        </section>
+      </div>
+
+      <section
+        class="tiles"
+        aria-label="Solar indices"
+        data-slot="tiles"
+      ></section>
+
+      <section class="vhf">
+        <h2>VHF</h2>
+        <ul data-slot="vhf-list"></ul>
+      </section>
+
+      <p class="credits">
+        Conditions by N0NBH, hamqsl.com &middot; Solar images courtesy of
+        NASA/SDO and the AIA and HMI science teams
+      </p>
+    </main>
+  </body>
+</html>

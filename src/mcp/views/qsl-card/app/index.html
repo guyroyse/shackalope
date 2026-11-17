@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QSL Card</title>
+    <script type="module" src="./main.ts"></script>
+  </head>
+  <body>
+    <main class="qsl" data-state="waiting" data-has-image="false">
+      <header class="front">
+        <img class="photo" data-slot="photo" alt="" />
+        <div class="masthead">
+          <h1 class="callsign" data-field="station-callsign">NØCALL</h1>
+          <p class="station-details" data-field="station-details"></p>
+        </div>
+      </header>
+
+      <section class="details">
+        <div class="stamp" aria-hidden="true">
+          <strong>QSL</strong>
+          <span>Confirmed</span>
+        </div>
+
+        <p class="to">
+          To radio
+          <strong data-field="contact-callsign"
+            >&middot; &middot; &middot;</strong
+          >
+          <span data-field="contact-name"></span>, confirming our QSO
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>UTC</th>
+              <th>MHz</th>
+              <th>Band</th>
+              <th>Mode</th>
+              <th>RST</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-field="date">----</td>
+              <td data-field="time">--:--</td>
+              <td data-field="frequency">--</td>
+              <td data-field="band">--</td>
+              <td data-field="mode">--</td>
+              <td data-field="rst">--</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <footer class="sign-off">
+          <p class="remarks" data-field="remarks">Tuning in&hellip;</p>
+          <p class="seventy-three">
+            73 de <strong data-field="sign-off-callsign">N0CALL</strong><br />
+            PSE QSL TNX
+          </p>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

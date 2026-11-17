@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+/* transparent, so the host's own background shows around the view */
+html,
+body {
+  margin: 0;
+  background: transparent;
+}
+
+body {
+  padding: 8px;
+  font-family: var(--font);
+  color: var(--ink);
+}

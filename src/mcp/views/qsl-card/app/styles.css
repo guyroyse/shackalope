@@ -1,0 +1,266 @@
+@import '../../shared/theme.css';
+@import '../../shared/base.css';
+
+/* a QSL card is a printed object, so it keeps its own paper and ink in either theme */
+:root {
+  --paper: #f4ecd8;
+  --paper-edge: #e6dbc0;
+  --card-ink: #1f2b3d;
+  --card-ink-soft: #5d5747;
+  --card-red: #b3332b;
+  --card-rule: #c9bc9c;
+  --display: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+body {
+  padding: 16px;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.qsl {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--card-ink);
+  background:
+    radial-gradient(circle at 20% 15%, rgb(255 255 255 / 0.5), transparent 60%),
+    var(--paper);
+  border: 1px solid var(--paper-edge);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* front: the operator's photo with the callsign over it */
+
+.front {
+  position: relative;
+  padding: 24px 28px 0;
+}
+
+.photo {
+  display: none;
+}
+
+[data-has-image='true'] .front {
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 2 / 1;
+  padding: 20px 24px;
+  background: #1a1a1a;
+}
+
+[data-has-image='true'] .photo {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-has-image='true'] .front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.65), rgb(0 0 0 / 0) 55%);
+}
+
+.masthead {
+  position: relative;
+  z-index: 1;
+}
+
+.callsign {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(44px, 13vw, 76px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: var(--card-red);
+  text-shadow: 3px 3px 0 var(--card-ink);
+}
+
+.station-details {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-style: italic;
+  font-variant-numeric: lining-nums;
+  color: var(--card-ink-soft);
+}
+
+.station-details:empty {
+  display: none;
+}
+
+[data-has-image='true'] .callsign {
+  color: #fff;
+  text-shadow:
+    0 2px 12px rgb(0 0 0 / 0.6),
+    3px 3px 0 var(--card-red);
+}
+
+[data-has-image='true'] .station-details {
+  color: rgb(255 255 255 / 0.9);
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.8);
+}
+
+/* back: the confirmation itself */
+
+.details {
+  position: relative;
+  padding: 16px 28px 22px;
+}
+
+.stamp {
+  position: absolute;
+  top: -34px;
+  right: 22px;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  width: 80px;
+  height: 80px;
+  border: 3px double var(--card-red);
+  border-radius: 50%;
+  color: var(--card-red);
+  background: rgb(244 236 216 / 0.92);
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(-12deg);
+}
+
+.stamp strong {
+  font-family: var(--display);
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.stamp span {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.to {
+  margin: 6px 96px 10px 0;
+  font-size: 15px;
+}
+
+.to strong {
+  font-family: var(--mono);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+
+.to [data-field='contact-name']:not(:empty)::before {
+  content: '(';
+}
+
+.to [data-field='contact-name']:not(:empty)::after {
+  content: ')';
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th {
+  padding: 4px 6px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--card-ink);
+}
+
+td {
+  padding: 8px 6px;
+  font-family: var(--mono);
+  font-size: 14px;
+  border: 1px solid var(--card-rule);
+  border-top: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.sign-off {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px 16px;
+  margin-top: 14px;
+}
+
+.remarks {
+  margin: 0;
+  font-size: 19px;
+  font-style: italic;
+}
+
+.seventy-three {
+  margin: 0;
+  font-size: 13px;
+  text-align: right;
+  color: var(--card-ink-soft);
+}
+
+.seventy-three strong {
+  color: var(--card-ink);
+  font-family: var(--mono);
+}
+
+[data-state='waiting'] [data-field] {
+  color: var(--card-rule);
+}
+
+@media (max-width: 460px) {
+  body {
+    padding: 8px;
+  }
+
+  .front {
+    padding: 18px 18px 0;
+  }
+
+  [data-has-image='true'] .front {
+    padding: 14px 16px;
+  }
+
+  .details {
+    padding: 14px 16px 18px;
+  }
+
+  .to {
+    margin-right: 64px;
+  }
+
+  .stamp {
+    top: -24px;
+    right: 14px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .stamp strong {
+    font-size: 17px;
+  }
+
+  .stamp span {
+    display: none;
+  }
+
+  th {
+    padding: 4px 2px;
+    letter-spacing: 0.04em;
+  }
+
+  td {
+    padding: 6px 2px;
+    font-size: 12px;
+  }
+}

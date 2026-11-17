@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "paths": {
+      "@mcp/*": ["./src/mcp/*"],
+      "@services/*": ["./src/services/*"],
+      "@stores/*": ["./src/stores/*"]
+    }
+  },
+  "include": ["src", ".claude/hooks", "vite.config.ts"],
+  "exclude": [
+    "src/mcp/views/*/app",
+    "src/mcp/views/shared",
+    "src/mcp/views/preview"
+  ]
+}

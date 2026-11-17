@@ -1,0 +1,39 @@
+{
+  "name": "radio-free-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "npm run build && concurrently --kill-others npm:dev:*",
+    "build": "rimraf dist && vite build",
+    "start": "node --enable-source-maps dist/server.js",
+    "typecheck": "tsc && tsc -p src/mcp/views",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "dev:views": "vite build --watch",
+    "dev:server": "node --watch --watch-preserve-output --enable-source-maps dist/server.js",
+    "dev:preview": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@hono/node-server": "^2.1.8",
+    "@modelcontextprotocol/ext-apps": "^2.0.4",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "fast-xml-parser": "^5.12.0",
+    "hono": "^4.13.18",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@types/node": "^26.6.6",
+    "concurrently": "^10.0.7",
+    "prettier": "^3.10.1",
+    "rimraf": "^6.1.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vite-plugin-singlefile": "^2.3.4"
+  }
+}

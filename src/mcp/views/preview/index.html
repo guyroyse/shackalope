@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View Preview</title>
+    <script type="module" src="./main.ts"></script>
+  </head>
+  <body>
+    <header class="toolbar">
+      <h1>View preview</h1>
+
+      <label>
+        View
+        <select data-control="view"></select>
+      </label>
+
+      <label>
+        Theme
+        <select data-control="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+
+      <label>
+        Width
+        <select data-control="width">
+          <option value="wide">Wide (720px)</option>
+          <option value="narrow">Narrow (375px)</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="stage">
+      <iframe
+        class="view"
+        title="View under preview"
+        sandbox="allow-scripts allow-same-origin"
+      ></iframe>
+    </main>
+
+    <aside class="side">
+      <section class="arguments">
+        <h2>Arguments for <code data-slot="tool-name"></code></h2>
+        <textarea
+          data-control="arguments"
+          spellcheck="false"
+          rows="12"
+          aria-label="Tool arguments as JSON"
+        ></textarea>
+        <div class="actions">
+          <button type="button" data-control="run">Run tool</button>
+          <button type="button" data-control="reset">Reset to sample</button>
+          <span class="hint">Ctrl+Enter runs it</span>
+        </div>
+      </section>
+
+      <section class="log">
+        <h2>Log</h2>
+        <ol data-slot="log"></ol>
+      </section>
+    </aside>
+  </body>
+</html>
