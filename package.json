@@ -1,5 +1,5 @@
 {
-  "name": "radio-free-ai",
+  "name": "shackalope",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
@@ -16,7 +16,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0-or-later",
   "type": "module",
   "dependencies": {
     "@hono/node-server": "^2.1.8",
@@ -35,5 +35,8 @@
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
     "vite-plugin-singlefile": "^2.3.4"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

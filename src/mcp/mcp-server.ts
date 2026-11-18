@@ -13,7 +13,7 @@ import { registerBandConditionsView } from './views/band-conditions/show-band-co
 import { registerQSL_CardView } from './views/qsl-card/show-qsl-card'
 
 export function buildMcpServer(services: Services): McpServer {
-  const server = new McpServer({ name: 'radio-free-ai', version: '1.0.0' })
+  const server = new McpServer({ name: 'shackalope', version: '1.0.0' })
 
   /* queries: read-only, each a resource with an optional tool for the model */
   registerBandConditionsQuery(server)

@@ -20,7 +20,7 @@ type Settings = {
   width: Width
 }
 
-const HOST_INFO = { name: 'radio-free-ai-preview', version: '1.0.0' }
+const HOST_INFO = { name: 'shackalope-preview', version: '1.0.0' }
 const HOST_CAPABILITIES = {
   serverTools: {},
   serverResources: {},

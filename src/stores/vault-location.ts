@@ -27,12 +27,12 @@ export function vaultDirectory(surroundings: Surroundings): string {
 function appDataDirectory({ platform, env, home }: Surroundings): string {
   if (platform === 'win32') {
     const localAppData = env.LOCALAPPDATA || join(home, 'AppData', 'Local')
-    return join(localAppData, 'Radio Free AI')
+    return join(localAppData, 'Shackalope')
   }
 
   if (platform === 'darwin')
-    return join(home, 'Library', 'Application Support', 'Radio Free AI')
+    return join(home, 'Library', 'Application Support', 'Shackalope')
 
   const dataHome = env.XDG_DATA_HOME || join(home, '.local', 'share')
-  return join(dataHome, 'radio-free-ai')
+  return join(dataHome, 'shackalope')
 }
