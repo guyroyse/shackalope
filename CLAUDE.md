@@ -45,6 +45,7 @@ Hosts fetch a view's HTML over MCP (`resources/read` on its `ui://` URI) and put
 
 ## Conventions
 
+- **Commits:** a single brief line, with no Claude attribution or trailers. The `attribution` setting in `.claude/settings.json` turns off the automatic trailers.
 - **Imports:** path aliases `@mcp/*`, `@services/*` and `@stores/*` for any import that goes up a folder; same-folder and child imports stay relative. No `.js` extensions (`moduleResolution: "bundler"`). CSS `@import`s stay relative.
 - **TypeScript style** follows Guy's personal style (the `code-typescript-like-guy` skill), enforced for formatting by `.prettierrc`. A Claude Code `PostToolUse` hook (`.claude/hooks/format.ts`) runs Prettier on every file Claude writes or edits; Prettier never rewraps comments or strings, so keep those within 80 columns by hand.
 - **Files** are named for what they hold: one file per tool (`get-…`, `set-…`, `show-…`), resources named for their URI scheme.
