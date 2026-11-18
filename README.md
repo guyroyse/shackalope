@@ -14,7 +14,7 @@ It's early days. Logging, rig control, and talking to the rest of your radio sof
 ### Install and run
 
 ```sh
-git clone <this repository's URL>
+git clone https://github.com/guyroyse/shackalope.git
 cd shackalope
 npm install
 npm run build
