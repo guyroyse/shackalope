@@ -6,6 +6,10 @@ export type Scenario = {
 /* the tool call that opens each view, with sample arguments; a new view
    needs an entry here to show up in the preview */
 export const SCENARIOS: Record<string, Scenario> = {
+  'band-activity': {
+    tool: 'show_band_activity',
+    arguments: {}
+  },
   'band-conditions': {
     tool: 'show_band_conditions',
     arguments: {}

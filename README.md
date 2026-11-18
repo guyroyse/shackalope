@@ -44,6 +44,7 @@ Then fully quit and restart Claude Desktop. Connectors added under Settings → 
 
 - "Set my station to K8XYZ, grid EN80, in Columbus, OH."
 - "Show me the band conditions."
+- "Which bands are open to Europe right now?"
 - "Make me a QSL card for W1AW. We worked on 14.074 FT8 and I sent -10."
 
 ## Your data
@@ -65,6 +66,11 @@ Your station details are in `station.json`, and QSL card backgrounds are in `qsl
 - **`get_band_conditions`**: current HF and VHF propagation and solar-terrestrial data (solar flux, sunspots, A and K indices, solar wind, noise) from N0NBH's HamQSL.
 - **`show_band_conditions`**: shows the band conditions as a panel with HF ratings, solar indices, and a live image of the sun.
 
+### Band activity
+
+- **`get_band_activity`**: which bands are carrying signals from which continents right now, as heard by PSKReporter receivers within 250 miles of your grid over the last 15 minutes. Needs your station's grid. The first call starts listening, and the picture fills in over the next 15 minutes.
+- **`show_band_activity`**: shows the band activity as a live band-by-continent grid that keeps itself up to date.
+
 ### Your station
 
 - **`get_station`**: your station's callsign, name, QTH, and Maidenhead grid.
@@ -82,6 +88,7 @@ Your station details are in `station.json`, and QSL card backgrounds are in `qsl
 ### Data
 
 - **`band-conditions://current`**: current band conditions as JSON.
+- **`band-activity://current`**: live band activity near your station as JSON.
 - **`station://current`**: your station details as JSON.
 - **`solar-image://sdo/{id}`**: the latest image of the sun from NASA's Solar Dynamics Observatory, in five views: composite, corona, chromosphere, sunspots, and magnetogram.
 - **`qsl-image://{name}`**: a saved QSL card background.
@@ -89,11 +96,12 @@ Your station details are in `station.json`, and QSL card backgrounds are in `qsl
 ### Views
 
 - **`ui://band-conditions/band-conditions.html`**: the band conditions panel.
+- **`ui://band-activity/band-activity.html`**: the live band activity grid.
 - **`ui://qsl-card/qsl-card.html`**: the QSL card.
 
 ## Credits
 
-Band conditions come from [N0NBH's HamQSL](https://www.hamqsl.com/solar.html). Solar images are courtesy of NASA/SDO and the AIA and HMI science teams.
+Band conditions come from [N0NBH's HamQSL](https://www.hamqsl.com/solar.html). Solar images are courtesy of NASA/SDO and the AIA and HMI science teams. Band activity comes from [PSKReporter](https://pskreporter.info)'s MQTT feed, with continents from [AD1C's country files](https://www.country-files.com).
 
 ## License
 
