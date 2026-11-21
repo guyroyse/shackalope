@@ -1,6 +1,7 @@
 import './styles.css'
 
 import { BAND_ACTIVITY_URI } from '@mcp/uris'
+import { isBandActivity } from '@mcp/views/shared/guards'
 import { connectViewApp, createViewApp } from '@mcp/views/shared/view-app'
 import type { BandActivity } from '@services/band-activity/model'
 import { summarizeBandActivity } from '@services/band-activity/summary'
@@ -101,12 +102,4 @@ function heardSignature({ cells }: BandActivity): string {
     .map(({ band, continent }) => `${band} ${continent}`)
     .sort()
     .join()
-}
-
-function isBandActivity(value: unknown): value is BandActivity {
-  if (typeof value !== 'object' || value === null) return false
-  const { bands, continents, cells } = value as Record<string, unknown>
-  return (
-    Array.isArray(bands) && Array.isArray(continents) && Array.isArray(cells)
-  )
 }

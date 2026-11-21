@@ -11,6 +11,8 @@ body {
 
 body {
   padding: 8px;
-  font-family: var(--font);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--ink);
 }

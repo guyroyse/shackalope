@@ -1,0 +1,259 @@
+@import './fonts.css';
+
+/* the pieces every terminal-styled view is built from: square corners,
+   1px rules, no shadows, and glow only where something is lit */
+
+.panel {
+  display: grid;
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  background: var(--ground);
+  border: 1px solid var(--rule);
+}
+
+.panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.panel-title {
+  margin: 0;
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--phosphor);
+  text-shadow: var(--glow-soft);
+}
+
+.meta {
+  margin: 0;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* section headings, column headings and readout names */
+.label {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.button {
+  padding: 3px 8px;
+  font-family: var(--head);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.button:hover,
+.button[aria-pressed='true'] {
+  color: var(--phosphor);
+  border-color: var(--phosphor);
+}
+
+.button:disabled {
+  color: var(--muted);
+  border-color: var(--rule);
+  cursor: progress;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--phosphor);
+  outline-offset: 2px;
+}
+
+.credits {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* readouts: a grid of lit numbers. Each cell draws its own left and top
+   rule and is pulled 1px up and left, so the outer frame hides the
+   duplicates; that works for any column count */
+
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+}
+
+.readout {
+  min-width: 0;
+  margin: -1px 0 0 -1px;
+  padding: 8px 10px;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  --level: var(--phosphor);
+}
+
+.readout[data-level='warn'] {
+  --level: var(--fair);
+}
+
+.readout[data-level='alert'] {
+  --level: var(--poor);
+}
+
+.readout-note {
+  margin-left: 6px;
+  color: var(--level);
+}
+
+.readout-value {
+  display: block;
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--level);
+  text-shadow: var(--glow);
+}
+
+.readout-unit {
+  margin-left: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  text-shadow: none;
+}
+
+@media (max-width: 460px) {
+  .readouts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ratings: three signal bars, lit by how good the band is; unlit bars are
+   a dim shade of the rating's own color */
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: var(--glow-soft);
+  --lit: currentColor;
+  --unlit: color-mix(in srgb, currentColor 28%, transparent);
+  --bar-2: var(--lit);
+  --bar-3: var(--lit);
+}
+
+.rating::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 9px;
+  background:
+    linear-gradient(var(--lit), var(--lit)) 0 100% / 4px 4px no-repeat,
+    linear-gradient(var(--bar-2), var(--bar-2)) 6px 100% / 4px 6px no-repeat,
+    linear-gradient(var(--bar-3), var(--bar-3)) 12px 100% / 4px 9px no-repeat;
+}
+
+.rating[data-rating='Good'] {
+  color: var(--good);
+}
+
+.rating[data-rating='Fair'] {
+  color: var(--fair);
+  --bar-3: var(--unlit);
+}
+
+.rating[data-rating='Poor'] {
+  color: var(--poor);
+  --bar-2: var(--unlit);
+  --bar-3: var(--unlit);
+}
+
+.rating[data-rating='Unknown'] {
+  color: var(--muted);
+  --lit: var(--unlit);
+  --bar-2: var(--unlit);
+  --bar-3: var(--unlit);
+}
+
+/* the HF table: band pairs down the side, day and night across */
+
+.hf-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.hf-table th {
+  padding: 0 0 6px;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+}
+
+.hf-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.hf-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* activity ramp, for anything with a data-tier of 0 to 4 */
+
+[data-tier='0'] {
+  color: var(--ramp-ink-0);
+  background: var(--ramp-0);
+}
+
+[data-tier='1'] {
+  color: var(--ramp-ink-1);
+  background: var(--ramp-1);
+}
+
+[data-tier='2'] {
+  color: var(--ramp-ink-2);
+  background: var(--ramp-2);
+}
+
+[data-tier='3'] {
+  color: var(--ramp-ink-3);
+  background: var(--ramp-3);
+}
+
+[data-tier='4'] {
+  color: var(--ramp-ink-4);
+  background: var(--ramp-4);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

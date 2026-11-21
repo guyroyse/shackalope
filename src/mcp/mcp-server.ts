@@ -12,6 +12,7 @@ import { registerSolarImageQuery } from './queries/solar-image'
 import { registerStationQuery } from './queries/station'
 import { registerBandActivityView } from './views/band-activity/show-band-activity'
 import { registerBandConditionsView } from './views/band-conditions/show-band-conditions'
+import { registerPropagationView } from './views/propagation/show-propagation'
 import { registerQSL_CardView } from './views/qsl-card/show-qsl-card'
 
 export function buildMcpServer(services: Services): McpServer {
@@ -32,6 +33,7 @@ export function buildMcpServer(services: Services): McpServer {
   /* views: a show tool plus the UI resource it opens */
   registerBandConditionsView(server)
   registerBandActivityView(server, services)
+  registerPropagationView(server, services)
   registerQSL_CardView(server, services)
 
   return server

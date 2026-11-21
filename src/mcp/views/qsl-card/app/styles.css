@@ -10,6 +10,8 @@
   --card-red: #b3332b;
   --card-rule: #c9bc9c;
   --display: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  --card-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 8px 24px rgb(0 0 0 / 0.12);
 }
 
 body {
@@ -149,7 +151,7 @@ body {
 }
 
 .to strong {
-  font-family: var(--mono);
+  font-family: var(--card-mono);
   font-size: 18px;
   letter-spacing: 0.04em;
 }
@@ -180,7 +182,7 @@ th {
 
 td {
   padding: 8px 6px;
-  font-family: var(--mono);
+  font-family: var(--card-mono);
   font-size: 14px;
   border: 1px solid var(--card-rule);
   border-top: none;
@@ -211,7 +213,7 @@ td {
 
 .seventy-three strong {
   color: var(--card-ink);
-  font-family: var(--mono);
+  font-family: var(--card-mono);
 }
 
 [data-state='waiting'] [data-field] {

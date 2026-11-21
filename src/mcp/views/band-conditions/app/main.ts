@@ -1,8 +1,8 @@
 import './styles.css'
 
 import { BAND_CONDITIONS_URI, SOLAR_IMAGE_PREFIX } from '@mcp/uris'
+import { isBandConditions } from '@mcp/views/shared/guards'
 import { connectViewApp, createViewApp } from '@mcp/views/shared/view-app'
-import type { BandConditions } from '@services/band-conditions/model'
 import { summarizeBandConditions } from '@services/band-conditions/summary'
 
 import {
@@ -86,10 +86,4 @@ async function loadSunImage(view: SunView) {
     console.error(`loading ${view.uri} failed`, error)
     showSunImage(panel, view, null)
   }
-}
-
-function isBandConditions(value: unknown): value is BandConditions {
-  if (typeof value !== 'object' || value === null) return false
-  const { solar, hf, vhf } = value as Record<string, unknown>
-  return typeof solar === 'object' && Array.isArray(hf) && Array.isArray(vhf)
 }

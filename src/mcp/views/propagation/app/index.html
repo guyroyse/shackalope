@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Propagation</title>
+    <script type="module" src="./main.ts"></script>
+  </head>
+  <body>
+    <main class="panel" data-state="waiting" data-activity="waiting">
+      <header class="panel-header">
+        <h1 class="panel-title">Propagation</h1>
+        <div class="header-actions">
+          <p class="meta" data-slot="updated">Fetching from HamQSL&hellip;</p>
+          <button type="button" class="button" data-slot="refresh">
+            Refresh
+          </button>
+        </div>
+      </header>
+
+      <section
+        class="readouts"
+        aria-label="Solar indices"
+        data-slot="readouts"
+      ></section>
+
+      <table class="hf-table">
+        <thead>
+          <tr>
+            <th scope="col" class="label">HF bands</th>
+            <th scope="col" class="label">Day</th>
+            <th scope="col" class="label">Night</th>
+          </tr>
+        </thead>
+        <tbody data-slot="hf-rows"></tbody>
+      </table>
+
+      <section class="activity">
+        <h2 class="label" data-slot="activity-label">
+          Band activity &middot; connecting to PSKReporter&hellip;
+        </h2>
+        <ol class="strip" data-slot="strip"></ol>
+        <p class="notice" data-slot="notice" hidden></p>
+      </section>
+
+      <p class="credits">
+        Conditions by N0NBH, hamqsl.com &middot; Reception reports from
+        PSKReporter (pskreporter.info)
+      </p>
+    </main>
+  </body>
+</html>

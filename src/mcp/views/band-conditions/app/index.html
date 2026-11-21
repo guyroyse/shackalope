@@ -9,12 +9,10 @@
   <body>
     <main class="panel" data-state="waiting">
       <header class="panel-header">
-        <h1>Band conditions</h1>
+        <h1 class="panel-title">Band conditions</h1>
         <div class="header-actions">
-          <p class="updated" data-slot="updated">
-            Fetching from HamQSL&hellip;
-          </p>
-          <button type="button" class="refresh" data-slot="refresh">
+          <p class="meta" data-slot="updated">Fetching from HamQSL&hellip;</p>
+          <button type="button" class="button" data-slot="refresh">
             Refresh
           </button>
         </div>
@@ -25,7 +23,7 @@
           <div class="sun-frame">
             <img data-slot="sun-image" alt="" width="512" height="512" />
           </div>
-          <figcaption data-slot="sun-caption"></figcaption>
+          <figcaption class="meta" data-slot="sun-caption"></figcaption>
           <div
             class="sun-views"
             role="group"
@@ -35,13 +33,12 @@
         </figure>
 
         <section class="hf">
-          <h2>HF</h2>
-          <table>
+          <table class="hf-table">
             <thead>
               <tr>
-                <th scope="col">Bands</th>
-                <th scope="col">Day</th>
-                <th scope="col">Night</th>
+                <th scope="col" class="label">HF bands</th>
+                <th scope="col" class="label">Day</th>
+                <th scope="col" class="label">Night</th>
               </tr>
             </thead>
             <tbody data-slot="hf-rows"></tbody>
@@ -50,13 +47,13 @@
       </div>
 
       <section
-        class="tiles"
+        class="readouts"
         aria-label="Solar indices"
-        data-slot="tiles"
+        data-slot="readouts"
       ></section>
 
       <section class="vhf">
-        <h2>VHF</h2>
+        <h2 class="label">VHF</h2>
         <ul data-slot="vhf-list"></ul>
       </section>
 

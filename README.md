@@ -1,6 +1,6 @@
 # Shackalope
 
-Shackalope is an [MCP](https://modelcontextprotocol.io) server that brings your ham radio shack to Claude. Ask Claude how the bands are looking and it pulls live propagation and solar data. Ask it to confirm a contact and it makes you a QSL card. Some tools also show interactive views right in the conversation: a band conditions panel with a live image of the sun, and QSL cards with your own background photos.
+Shackalope is an [MCP](https://modelcontextprotocol.io) server that brings your ham radio shack to Claude. Ask Claude how the bands are looking and it pulls live propagation and solar data. Ask it to confirm a contact and it makes you a QSL card. Some tools also show interactive views right in the conversation: a band conditions panel with a live image of the sun, a live band activity grid, a compact propagation panel, and QSL cards with your own background photos.
 
 It's early days. Logging, rig control, and talking to the rest of your radio software are on the way.
 
@@ -71,6 +71,10 @@ Your station details are in `station.json`, and QSL card backgrounds are in `qsl
 - **`get_band_activity`**: which bands are carrying signals from which continents right now, as heard by PSKReporter receivers within 250 miles of your grid over the last 15 minutes. Needs your station's grid. The first call starts listening, and the picture fills in over the next 15 minutes.
 - **`show_band_activity`**: shows the band activity as a live band-by-continent grid that keeps itself up to date.
 
+### Propagation
+
+- **`show_propagation`**: shows a compact panel with the key solar readouts (highlighted when they're disruptive), the HF band ratings, and a live strip of how many stations are being heard near you on each band.
+
 ### Your station
 
 - **`get_station`**: your station's callsign, name, QTH, and Maidenhead grid.
@@ -97,6 +101,7 @@ Your station details are in `station.json`, and QSL card backgrounds are in `qsl
 
 - **`ui://band-conditions/band-conditions.html`**: the band conditions panel.
 - **`ui://band-activity/band-activity.html`**: the live band activity grid.
+- **`ui://propagation/propagation.html`**: the propagation panel.
 - **`ui://qsl-card/qsl-card.html`**: the QSL card.
 
 ## Credits

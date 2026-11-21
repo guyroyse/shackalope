@@ -1,7 +1,16 @@
+import { renderHF_Row } from '@mcp/views/shared/ratings'
+import { renderReadout } from '@mcp/views/shared/readouts'
+import type { Readout } from '@mcp/views/shared/readouts'
+import {
+  readA_Index,
+  readBz,
+  readGeomagneticField,
+  readKIndex,
+  readSolarWind,
+  readXray
+} from '@services/band-conditions/levels'
 import type {
   BandConditions,
-  BandRating,
-  HF_BandCondition,
   VHF_Condition
 } from '@services/band-conditions/model'
 
@@ -11,22 +20,14 @@ export type SunView = {
   description: string
 }
 
-type Tile = {
-  label: string
-  value: string | number | null
-  unit?: string
-}
-
-const HYPHEN = /-/g
-
 export function renderBandConditions(
   panel: HTMLElement,
   conditions: BandConditions
 ) {
   slot(panel, 'updated').textContent = formatUpdated(conditions.updated)
   slot(panel, 'hf-rows').replaceChildren(...conditions.hf.map(renderHF_Row))
-  slot(panel, 'tiles').replaceChildren(
-    ...buildTiles(conditions).map(renderTile)
+  slot(panel, 'readouts').replaceChildren(
+    ...buildReadouts(conditions).map(renderReadout)
   )
   slot(panel, 'vhf-list').replaceChildren(...conditions.vhf.map(renderVHF_Item))
   panel.dataset.state = 'ready'
@@ -40,6 +41,7 @@ export function renderSunPicker(
   const buttons = views.map(view => {
     const button = document.createElement('button')
     button.type = 'button'
+    button.className = 'button'
     button.textContent = view.title
     button.title = view.description
     button.addEventListener('click', () => {
@@ -90,29 +92,41 @@ function markSelected(buttons: HTMLButtonElement[], selectedIndex: number) {
   )
 }
 
-function buildTiles(conditions: BandConditions): Tile[] {
-  const { solar } = conditions
+function buildReadouts(conditions: BandConditions): Readout[] {
+  const { solar, geomagneticField, signalNoise } = conditions
   return [
     { label: 'Solar flux', value: solar.solarFlux },
     { label: 'Sunspots', value: solar.sunspots },
-    { label: 'A index', value: solar.aIndex },
-    { label: 'K index', value: solar.kIndex },
-    { label: 'X-ray', value: solar.xray },
-    { label: 'Solar wind', value: round(solar.solarWind), unit: 'km/s' },
-    { label: 'Bz', value: solar.magneticField, unit: 'nT' },
-    { label: 'Geomagnetic', value: conditions.geomagneticField },
-    { label: 'Noise', value: conditions.signalNoise }
+    { label: 'X-ray', value: solar.xray, reading: readXray(solar.xray) },
+    {
+      label: 'K index',
+      value: solar.kIndex,
+      reading: readKIndex(solar.kIndex)
+    },
+    {
+      label: 'A index',
+      value: solar.aIndex,
+      reading: readA_Index(solar.aIndex)
+    },
+    {
+      label: 'Geomagnetic',
+      value: geomagneticField,
+      reading: readGeomagneticField(geomagneticField)
+    },
+    {
+      label: 'Bz',
+      value: solar.magneticField,
+      unit: 'nT',
+      reading: readBz(solar.magneticField)
+    },
+    {
+      label: 'Solar wind',
+      value: round(solar.solarWind),
+      unit: 'km/s',
+      reading: readSolarWind(solar.solarWind)
+    },
+    { label: 'Noise', value: signalNoise }
   ]
-}
-
-function renderHF_Row({ bands, day, night }: HF_BandCondition) {
-  const row = document.createElement('tr')
-  row.append(
-    cell(bands.replace(HYPHEN, '–'), 'bands'),
-    ratingCell(day),
-    ratingCell(night)
-  )
-  return row
 }
 
 function renderVHF_Item({ phenomenon, location, status }: VHF_Condition) {
@@ -126,51 +140,6 @@ function renderVHF_Item({ phenomenon, location, status }: VHF_Condition) {
 
   item.append(name, state)
   return item
-}
-
-function renderTile({ label, value, unit }: Tile) {
-  const tile = document.createElement('div')
-  const labelElement = document.createElement('p')
-  const valueElement = document.createElement('p')
-
-  tile.className = 'tile'
-  labelElement.className = 'tile-label'
-  valueElement.className = 'tile-value'
-
-  labelElement.textContent = label
-  valueElement.textContent = value === null ? '—' : String(value)
-
-  if (unit && value !== null) {
-    const unitElement = document.createElement('span')
-    unitElement.className = 'tile-unit'
-    unitElement.textContent = unit
-    valueElement.append(unitElement)
-  }
-
-  tile.append(labelElement, valueElement)
-  return tile
-}
-
-function ratingCell(rating: BandRating) {
-  const tableCell = document.createElement('td')
-  const wrapper = document.createElement('span')
-  const icon = document.createElement('span')
-
-  wrapper.className = 'rating'
-  wrapper.dataset.rating = rating
-  icon.className = 'rating-icon'
-  icon.setAttribute('aria-hidden', 'true')
-
-  wrapper.append(icon, rating)
-  tableCell.append(wrapper)
-  return tableCell
-}
-
-function cell(text: string, className: string) {
-  const tableCell = document.createElement('td')
-  tableCell.className = className
-  tableCell.textContent = text
-  return tableCell
 }
 
 function formatUpdated(updated: string | null): string {

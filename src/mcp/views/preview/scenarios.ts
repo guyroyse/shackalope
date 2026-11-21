@@ -14,6 +14,10 @@ export const SCENARIOS: Record<string, Scenario> = {
     tool: 'show_band_conditions',
     arguments: {}
   },
+  propagation: {
+    tool: 'show_propagation',
+    arguments: {}
+  },
   'qsl-card': {
     tool: 'show_qsl_card',
     arguments: {

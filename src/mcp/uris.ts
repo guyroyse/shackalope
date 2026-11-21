@@ -13,6 +13,7 @@ export const BAND_CONDITIONS_VIEW_URI =
   'ui://band-conditions/band-conditions.html'
 export const BAND_ACTIVITY_VIEW_URI = 'ui://band-activity/band-activity.html'
 export const QSL_CARD_VIEW_URI = 'ui://qsl-card/qsl-card.html'
+export const PROPAGATION_VIEW_URI = 'ui://propagation/propagation.html'
 
 export function solarImageURI(id: string): string {
   return `solar-image://sdo/${id}`
